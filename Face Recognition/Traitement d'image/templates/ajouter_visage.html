@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter un Visage</title>
+    <style>
+        /* Style global */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f9fb;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Conteneur du formulaire */
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 400px;
+        }
+
+        /* Titre */
+        h1 {
+            text-align: center;
+            color: #007BFF;
+            margin-bottom: 20px;
+        }
+
+        /* Labels */
+        label {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+            color: #555;
+        }
+
+        /* Champs de texte */
+        input[type="text"], select, input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        /* Champs de sélection (Célébrité) */
+        select {
+            cursor: pointer;
+        }
+
+        /* Bouton de soumission */
+        input[type="submit"] {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #218838;
+        }
+
+        /* Messages flash */
+        .flash-message {
+            background-color: #28a745;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .flash-message.error {
+            background-color: #dc3545;
+        }
+
+        /* Espacement */
+        .spacer {
+            margin-bottom: 15px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Ajouter un nouveau visage</h1>
+
+        <!-- Afficher les messages de succès ou d'erreur -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="flash-message">
+                    {{ messages[0] }}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <!-- Formulaire pour ajouter un visage -->
+        <form action="{{ url_for('ajouter_visage') }}" method="post" enctype="multipart/form-data">
+            <div class="spacer">
+                <label for="nom">Nom :</label>
+                <input type="text" name="nom" required>
+            </div>
+
+            <div class="spacer">
+                <label for="prenom">Prénom :</label>
+                <input type="text" name="prenom" required>
+            </div>
+
+            <div class="spacer">
+                <label for="is_celebrity">Célébrité :</label>
+                <select name="is_celebrity" required>
+                    <option value="yes">Oui</option>
+                    <option value="no">Non</option>
+                </select>
+            </div>
+
+            <div class="spacer">
+                <label for="file">Télécharger la photo :</label>
+                <input type="file" name="file" accept="image/*" required>
+            </div>
+
+            <input type="submit" value="Ajouter">
+        </form>
+    </div>
+</body>
+</html>
