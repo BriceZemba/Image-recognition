@@ -1,7 +1,3 @@
-Here’s a professional and clear **README** file for your **Image Recognition** project:
-
----
-
 # **Image-Recognition**  
 A system to recognize known people stored in a database using images or video streams.
 
